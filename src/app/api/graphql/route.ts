@@ -20,7 +20,7 @@ const createServerHandler = async () => {
   return handler;
 };
 
-//* can be done using top level await putting in next config - kind of lazy :)
+//* can be done using top level await by putting in next config - kind of lazy :)
 export async function GET(request: Request) {
   const handler = await createServerHandler();
   return handler(request);
