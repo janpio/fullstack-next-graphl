@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import { NextRequest } from "next/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { ApolloServer } from "@apollo/server";
 // import { gql } from "graphql-tag"; // sorry no need in typegraphql
@@ -16,7 +17,11 @@ const createServerHandler = async () => {
   const server = new ApolloServer({
     schema: schema,
   });
-  const handler = startServerAndCreateNextHandler(server);
+  // const handler = startServerAndCreateNextHandler(server);
+  const handler = startServerAndCreateNextHandler<NextRequest>(server, {
+    context: async (req) => ({ req }),
+  });
+
   return handler;
 };
 

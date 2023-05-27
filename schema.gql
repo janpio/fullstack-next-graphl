@@ -3,7 +3,22 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type PostSchema {
+  content: String
+  createdAt: DateTime!
+  id: ID!
+  isPublished: Boolean
+  title: String
+  updatedAt: DateTime!
+}
+
 type Query {
+  getPosts: [PostSchema!]!
   getUser: String!
   getUserInformation: UserSchema!
 }
