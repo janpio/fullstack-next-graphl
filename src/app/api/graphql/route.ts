@@ -4,7 +4,7 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { ApolloServer } from "@apollo/server";
 // import { gql } from "graphql-tag"; // sorry no need in typegraphql
 import { buildSchema } from "type-graphql";
-import { resolvers as resolver } from "../../../resolver/index";
+import { resolvers as resolver } from "../../../server/resolver/index";
 
 // kind of fascinating in oop(class based). it can be done using normal way but i like typegraphql way
 const createServerHandler = async () => {

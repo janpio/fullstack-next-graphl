@@ -1,13 +1,12 @@
 import Image from "next/image";
-import { prisma } from "../../lib/db";
 
-const getData = async () => {
-  const data = await prisma.post.findMany();
-  console.log("data is", data);
-  return data;
-};
+import { getClient } from "@/lib/client";
+import { GET_POST } from "@/graphql/post/user";
+import Post from "@/components/post";
+
 export default async function Home() {
-  const data = await getData();
+  const response = await getClient().query({ query: GET_POST });
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -35,7 +34,10 @@ export default async function Home() {
         </div>
       </div>
 
-      {JSON.stringify(data)}
+      <h1>Apollo data - working on ....</h1>
+      {JSON.stringify(response.data)}
+
+      <Post />
     </main>
   );
 }

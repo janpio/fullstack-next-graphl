@@ -1,4 +1,4 @@
-import { prisma } from "../lib/db";
+import { prisma } from "../src/lib/db";
 
 const createPost = async () => {
   const data = await prisma.post.createMany({

@@ -1,4 +1,4 @@
-import { PostSchema } from "@/schema/post.schema";
+import { PostSchema } from "@/server/schema/post.schema";
 import { Arg, Query, Resolver } from "type-graphql";
 import { prisma } from "../../lib/db";
 

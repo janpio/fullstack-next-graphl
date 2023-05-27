@@ -1,4 +1,4 @@
-import { UserSchema } from "@/schema/user.shema";
+import { UserSchema } from "@/server/schema/user.shema";
 import {
   Arg,
   Field,
