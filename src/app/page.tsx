@@ -35,7 +35,7 @@ export default async function Home() {
       </div>
 
       <h1>Apollo data - working on ....</h1>
-      {JSON.stringify(response.data)}
+      {JSON.stringify(response?.data)}
 
       <Post />
     </main>
