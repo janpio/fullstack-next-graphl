@@ -11,7 +11,8 @@ export default async function Home() {
 
   // * for running in production mode apollo client is not working well
 
-  const response = await fetch("http://localhost:3000/api/graphql", {
+  const url = "http://127.0.0.1:3000/api/graphql";
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "content-type": "application/json",
