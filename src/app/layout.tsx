@@ -1,7 +1,7 @@
 import { ApolloWrapper } from "../lib/apollo-wrapper";
 import "./globals.css";
 import { Inter } from "next/font/google";
-
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ApolloWrapper>{children}</ApolloWrapper>
+        <Toaster />
       </body>
     </html>
   );
