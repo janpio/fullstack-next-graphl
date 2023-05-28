@@ -20,17 +20,17 @@ export default async function Home() {
 
     body: JSON.stringify({
       query: `    
-      query GetPost {
-        getPosts {
-          id
-          createdAt
-          updatedAt
-          title
-          content
-          isPublished
+        query GetPost {
+          getPosts {
+            id
+            createdAt
+            updatedAt
+            title
+            content
+            isPublished
+          }
         }
-      }
-      `,
+        `,
     }),
   });
   const data = await response.json();
