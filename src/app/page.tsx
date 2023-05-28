@@ -7,18 +7,48 @@ import ImageUpload from "@/components/ImageUpload";
 import Route from "@/components/route";
 
 export default async function Home() {
-  const response = await getClient().query({ query: GET_POST });
+  // const response = await getClient().query({ query: GET_POST });
+
+  // * for running in production mode apollo client is not working well
+
+  const response = await fetch("http://localhost:3000/api/graphql", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+
+    body: JSON.stringify({
+      query: `    
+      query GetPost {
+        getPosts {
+          id
+          createdAt
+          updatedAt
+          title
+          content
+          isPublished
+        }
+      }
+      `,
+    }),
+  });
+  const data = await response.json();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1 className="text-center my-3 text-xl">
+        No clue no idea what is this ? Its sucks right working on it to make
+        better
+      </h1>
+      <Route />
+
       <h1>Apollo data - working on ....</h1>
-      {JSON.stringify(response?.data)}
+      {JSON.stringify(data)}
 
       <Post />
 
       <ImageUpload />
       <br />
-      <Route />
     </main>
   );
 }
