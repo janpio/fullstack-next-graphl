@@ -7,7 +7,7 @@ import ImageUpload from "@/components/ImageUpload";
 import Route from "@/components/route";
 
 async function connect() {
-  const url = process.env.APP_URL as string; // Replace with your target URL
+  const url = "fullstack-next-graphl-git-main-nabwinsaud.vercel.app/graphql"; // Replace with your target URL
 
   while (true) {
     try {
