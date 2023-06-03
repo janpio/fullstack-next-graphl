@@ -27,6 +27,7 @@ export default function ImageUpload() {
   });
   const [image, setImage] = useState<any>();
   const [imageUrl, setImageUrl] = useState<string>();
+  const [selectedFiles, setSelectedFiles] = useState<any[]>([]);
 
   const [progress, setProgress] = useState<number>(0);
   const { toast } = useToast();
@@ -66,14 +67,15 @@ export default function ImageUpload() {
   //     }
   //   );
   // }, []);
+
+  console.log("files is", selectedFiles);
   const handleImageUpload = async () => {
     try {
       if (image) {
-        const res = await uploadBytes(storageRef, image);
-        console.log("response for image is", res.ref);
-        console.log("response for image is", res.metadata);
-
-        toast({ title: "success", description: res.metadata.fullPath });
+        // const res = await uploadBytes(storageRef, image);
+        // console.log("response for image is", res.ref);
+        // console.log("response for image is", res.metadata);
+        // toast({ title: "success", description: res.metadata.fullPath });
       }
     } catch (err: any) {
       console.log("error", err);
@@ -94,10 +96,15 @@ export default function ImageUpload() {
         <Input
           type="file"
           {...register("image")}
-          onChange={(e) => setImage(e.target?.files?.[0])}
+          onChange={(e) => {
+            setImage(e.target?.files?.[0]);
+            setSelectedFiles((prev: any) => [...prev, e.target?.files?.[0]]);
+          }}
         />
-        <Button onClick={handleImageUpload}>submit</Button>
+        {/* <Button onClick={handleImageUpload}>submit</Button> */}
       </form>
+
+      <ImageRenderer files={selectedFiles} />
 
       {imageUrl && (
         <Image
@@ -139,6 +146,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ImageRenderer from "./ImageRenderer";
 
 const invoices = [
   {

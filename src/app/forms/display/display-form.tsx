@@ -48,6 +48,7 @@ const displayFormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {
     message: "You have to select at least one item.",
   }),
+  fullName: z.string({ description: "Name is required" }),
 });
 
 type DisplayFormValues = z.infer<typeof displayFormSchema>;
@@ -125,6 +126,7 @@ export function DisplayForm() {
             </FormItem>
           )}
         />
+
         <Button type="submit">Update display</Button>
       </form>
     </Form>

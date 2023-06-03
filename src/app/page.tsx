@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { getClient } from "@/lib/client";
-import { GET_POST } from "@/graphql/post/user";
+// import { getClient } from "@/lib/client";
+// import { GET_POST } from "@/graphql/post/user";
 import Post from "@/components/post";
 import ImageUpload from "@/components/ImageUpload";
 import Route from "@/components/route";
@@ -11,29 +11,29 @@ export default async function Home() {
 
   // * for running in production mode apollo client is not working well
 
-  const url = "http://127.0.0.1:3000/api/graphql";
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
+  // const url = "http://127.0.0.1:3000/api/graphql";
+  // const response = await fetch(url, {
+  //   method: "POST",
+  //   headers: {
+  //     "content-type": "application/json",
+  //   },
 
-    body: JSON.stringify({
-      query: `    
-        query GetPost {
-          getPosts {
-            id
-            createdAt
-            updatedAt
-            title
-            content
-            isPublished
-          }
-        }
-        `,
-    }),
-  });
-  const data = await response.json();
+  //   body: JSON.stringify({
+  //     query: `
+  //       query GetPost {
+  //         getPosts {
+  //           id
+  //           createdAt
+  //           updatedAt
+  //           title
+  //           content
+  //           isPublished
+  //         }
+  //       }
+  //       `,
+  //   }),
+  // });
+  // const data = await response.json();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -44,11 +44,11 @@ export default async function Home() {
       <Route />
 
       <h1>Apollo data - working on ....</h1>
-      {JSON.stringify(data)}
+      {/* {JSON.stringify(data)} */}
 
-      <Post />
+      {/* <Post /> */}
 
-      <ImageUpload />
+      {/* <ImageUpload /> */}
       <br />
     </main>
   );
