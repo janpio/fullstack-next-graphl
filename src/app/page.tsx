@@ -6,6 +6,8 @@ import Post from "@/components/post";
 import ImageUpload from "@/components/ImageUpload";
 import Route from "@/components/route";
 
+import axios from "axios";
+
 const url = "http://localhost:3000/api/graphql"; // Replace with your target URL
 async function connect() {
   while (true) {
@@ -23,34 +25,70 @@ async function connect() {
   }
 }
 
+const fetchData = async () => {
+  const options = {
+    method: "POST",
+    url: url,
+    data: {
+      query: `
+      query GetPosts {
+        getPosts {
+          id
+          createdAt
+          updatedAt
+          title
+          content
+          isPublished
+        }
+      }  
+
+      `,
+    },
+  };
+  const response = await axios.request(options);
+  return response.data;
+  // axios
+  //   .request(options)
+  //   .then(function (response) {
+  //     console.log("response is", response);
+  //     const res = response.data; // Response received from the API
+  //   })
+  //   .catch(function (error) {
+  //     console.error(error);
+  //   });
+};
+
 export default async function Home() {
   // const response = await getClient().query({ query: GET_POST });
 
   // * for running in production mode apollo client is not working well
 
   // const url = process.env.API_URL as string;
-  const connectionFetch = await connect();
-  const response = await connectionFetch(url, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
+  // const connectionFetch = await connect();
+  // const response = await connectionFetch(url, {
+  //   method: "POST",
+  //   headers: {
+  //     "content-type": "application/json",
+  //   },
 
-    body: JSON.stringify({
-      query: `
-        query GetPost {
-          getPosts {
-            id
-            createdAt
-            updatedAt
-            title
-            content
-            isPublished
-          }
-        }
-        `,
-    }),
-  });
+  //   body: JSON.stringify({
+  //     query: `
+  //       query GetPost {
+  //         getPosts {
+  //           id
+  //           createdAt
+  //           updatedAt
+  //           title
+  //           content
+  //           isPublished
+  //         }
+  //       }
+  //       `,
+  //   }),
+  // });
+
+  const res = await fetchData();
+  console.log("annananana", res);
   // const response = await fetch(url, {
   //   method: "POST",
   //   headers: {
@@ -72,7 +110,7 @@ export default async function Home() {
   //       `,
   //   }),
   // });
-  const data = await response.json();
+  // const data = await response.json();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -83,7 +121,7 @@ export default async function Home() {
       <Route />
 
       <h1>Apollo data - working on ....</h1>
-      {JSON.stringify(data)}
+      {JSON.stringify(res)}
 
       {/* <Post /> */}
 
