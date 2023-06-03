@@ -6,13 +6,32 @@ import Post from "@/components/post";
 import ImageUpload from "@/components/ImageUpload";
 import Route from "@/components/route";
 
+async function connect() {
+  const url = process.env.APP_URL as string; // Replace with your target URL
+
+  while (true) {
+    try {
+      const response = await fetch(url);
+      console.log("Connected!");
+      return fetch;
+      // Do further processing with the response if needed
+      // break; // Break the loop since connection is successful
+    } catch (error: any) {
+      console.error("Connection failed:", error.message);
+      // Wait for a certain period before retrying
+      await new Promise((resolve) => setTimeout(resolve, 3000)); // Adjust the delay as needed
+    }
+  }
+}
+
 export default async function Home() {
   // const response = await getClient().query({ query: GET_POST });
 
   // * for running in production mode apollo client is not working well
 
   const url = process.env.API_URL as string;
-  const response = await fetch(url, {
+  const connectionFetch = await connect();
+  const response = await connectionFetch(url, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -33,6 +52,27 @@ export default async function Home() {
         `,
     }),
   });
+  // const response = await fetch(url, {
+  //   method: "POST",
+  //   headers: {
+  //     "content-type": "application/json",
+  //   },
+
+  //   body: JSON.stringify({
+  //     query: `
+  //       query GetPost {
+  //         getPosts {
+  //           id
+  //           createdAt
+  //           updatedAt
+  //           title
+  //           content
+  //           isPublished
+  //         }
+  //       }
+  //       `,
+  //   }),
+  // });
   const data = await response.json();
 
   return (
