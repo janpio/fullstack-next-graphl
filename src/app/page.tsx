@@ -6,9 +6,8 @@ import Post from "@/components/post";
 import ImageUpload from "@/components/ImageUpload";
 import Route from "@/components/route";
 
+const url = "https://localhost:3000/api/graphql"; // Replace with your target URL
 async function connect() {
-  const url = "fullstack-next-graphl-git-main-nabwinsaud.vercel.app/graphql"; // Replace with your target URL
-
   while (true) {
     try {
       const response = await fetch(url);
@@ -29,7 +28,7 @@ export default async function Home() {
 
   // * for running in production mode apollo client is not working well
 
-  const url = process.env.API_URL as string;
+  // const url = process.env.API_URL as string;
   const connectionFetch = await connect();
   const response = await connectionFetch(url, {
     method: "POST",
