@@ -6,7 +6,7 @@ import Post from "@/components/post";
 import ImageUpload from "@/components/ImageUpload";
 import Route from "@/components/route";
 
-const url = "https://localhost:3000/api/graphql"; // Replace with your target URL
+const url = "http://localhost:3000/api/graphql"; // Replace with your target URL
 async function connect() {
   while (true) {
     try {
