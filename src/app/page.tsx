@@ -8,109 +8,35 @@ import Route from "@/components/route";
 
 import axios from "axios";
 
-const url = "http://localhost:3000/api/graphql"; // Replace with your target URL
-async function connect() {
-  while (true) {
-    try {
-      const response = await fetch(url);
-      console.log("Connected!");
-      return fetch;
-      // Do further processing with the response if needed
-      // break; // Break the loop since connection is successful
-    } catch (error: any) {
-      console.error("Connection failed:", error.message);
-      // Wait for a certain period before retrying
-      await new Promise((resolve) => setTimeout(resolve, 3000)); // Adjust the delay as needed
-    }
-  }
-}
-
-const fetchData = async () => {
-  const options = {
-    method: "POST",
-    url: url,
-    data: {
-      query: `
-      query GetPosts {
-        getPosts {
-          id
-          createdAt
-          updatedAt
-          title
-          content
-          isPublished
-        }
-      }  
-
-      `,
-    },
-  };
-  const response = await axios.request(options);
-  return response.data;
-  // axios
-  //   .request(options)
-  //   .then(function (response) {
-  //     console.log("response is", response);
-  //     const res = response.data; // Response received from the API
-  //   })
-  //   .catch(function (error) {
-  //     console.error(error);
-  //   });
-};
+const url = "https://fullstack-next-graphl.vercel.app/api/graphql";
+// const url = "http://localhost:3000/api/graphql"; // Replace with your target URL
 
 export default async function Home() {
   // const response = await getClient().query({ query: GET_POST });
 
   // * for running in production mode apollo client is not working well
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
 
-  // const url = process.env.API_URL as string;
-  // const connectionFetch = await connect();
-  // const response = await connectionFetch(url, {
-  //   method: "POST",
-  //   headers: {
-  //     "content-type": "application/json",
-  //   },
-
-  //   body: JSON.stringify({
-  //     query: `
-  //       query GetPost {
-  //         getPosts {
-  //           id
-  //           createdAt
-  //           updatedAt
-  //           title
-  //           content
-  //           isPublished
-  //         }
-  //       }
-  //       `,
-  //   }),
-  // });
-
-  const res = await fetchData();
-  console.log("annananana", res);
-  // const response = await fetch(url, {
-  //   method: "POST",
-  //   headers: {
-  //     "content-type": "application/json",
-  //   },
-
-  //   body: JSON.stringify({
-  //     query: `
-  //       query GetPost {
-  //         getPosts {
-  //           id
-  //           createdAt
-  //           updatedAt
-  //           title
-  //           content
-  //           isPublished
-  //         }
-  //       }
-  //       `,
-  //   }),
-  // });
-  // const data = await response.json();
+    body: JSON.stringify({
+      query: `
+        query GetPost {
+          getPosts {
+            id
+            createdAt
+            updatedAt
+            title
+            content
+            isPublished
+          }
+        }
+        `,
+    }),
+  });
+  const data = await response.json();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -121,7 +47,7 @@ export default async function Home() {
       <Route />
 
       <h1>Apollo data - working on ....</h1>
-      {JSON.stringify(res)}
+      {JSON.stringify(data)}
 
       {/* <Post /> */}
 
