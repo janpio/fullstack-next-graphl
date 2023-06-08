@@ -8,8 +8,8 @@ import Route from "@/components/route";
 
 import axios from "axios";
 
-const url = "https://fullstack-next-graphl.vercel.app/api/graphql";
-// const url = "http://localhost:3000/api/graphql"; // Replace with your target URL
+// const url = "https://fullstack-next-graphl.vercel.app/api/graphql";
+const url = "http://localhost:3000/api/graphql1"; // Replace with your target URL
 
 export default async function Home() {
   // const response = await getClient().query({ query: GET_POST });
