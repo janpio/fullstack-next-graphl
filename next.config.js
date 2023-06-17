@@ -6,18 +6,6 @@ const nextConfig = {
   images: {
     domains: ["firebasestorage.googleapis.com"],
   },
-
-  webpack: (config) => {
-    config.experiments = config.experiments || {};
-    config.experiments.topLevelAwait = true;
-    return config;
-  },
-  // webpack: (config) => {
-  //   config.experiments = {
-  //     topLevelAwait: true,
-  //   };
-  //   return config;
-  // },
 };
 
 module.exports = nextConfig;
